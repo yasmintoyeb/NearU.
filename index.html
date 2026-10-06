@@ -19,6 +19,29 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     #hero-map { height: 320px; border-radius: 1rem; }
+    body.dark-mode {
+      color-scheme: dark;
+      background-color: #0f172a;
+      color: #e2e8f0;
+    }
+    body.dark-mode .bg-white { background-color: #1e293b; }
+    body.dark-mode .bg-slate-50 { background-color: #0f172a; }
+    body.dark-mode .bg-slate-100 { background-color: #334155; }
+    body.dark-mode .bg-slate-200 { background-color: #475569; }
+    body.dark-mode .bg-primary-50 { background-color: #1e3a5f; }
+    body.dark-mode .border-slate-100,
+    body.dark-mode .border-slate-200 { border-color: #334155; }
+    body.dark-mode .border-primary-200 { border-color: #1d4ed8; }
+    body.dark-mode .text-slate-900,
+    body.dark-mode .text-slate-800,
+    body.dark-mode .text-slate-700 { color: #f1f5f9; }
+    body.dark-mode .text-slate-600,
+    body.dark-mode .text-slate-500 { color: #cbd5e1; }
+    body.dark-mode .text-slate-400 { color: #94a3b8; }
+    body.dark-mode input,
+    body.dark-mode select { color: #f1f5f9; }
+    body.dark-mode input::placeholder { color: #94a3b8; }
+    body.dark-mode option { background-color: #1e293b; color: #f1f5f9; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
@@ -40,10 +63,10 @@
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <button class="text-sm text-slate-500 hover:text-slate-700">EN ▾</button>
-          <button class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">🌙</button>
-          <a href="#" class="text-sm font-medium text-slate-600 hover:text-primary-600">Login</a>
-          <a href="#" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700">Sign Up</a>
+          <button id="language-toggle" type="button" class="text-sm text-slate-500 hover:text-slate-700" aria-label="Switch to Khmer">ខ្មែរ ▾</button>
+          <button id="dark-mode-toggle" type="button" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500" aria-label="Turn on dark mode" aria-pressed="false">🌙</button>
+          <a href="login.html" class="text-sm font-medium text-slate-600 hover:text-primary-600">Login</a>
+          <a href="signup.html" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700">Sign Up</a>
         </div>
       </div>
     </div>
@@ -64,11 +87,11 @@
         <div class="mt-8 bg-white rounded-2xl shadow-lg border border-slate-200 p-4 flex flex-col sm:flex-row gap-3">
           <div class="flex-1">
             <label class="block text-xs font-medium text-slate-500 mb-1">LOCATION / UNIVERSITY</label>
-            <input type="text" placeholder="e.g. RUPP, Toul Kork..." class="w-full border-0 focus:ring-0 text-sm p-0 placeholder:text-slate-400" />
+            <input type="text" placeholder="e.g. RUPP, Toul Kork..." class="w-full border border-slate-300 rounded-md focus:ring-0 text-sm p-0 placeholder:text-slate-400 focus:border-primary-600" />
           </div>
           <div class="w-full sm:w-28">
             <label class="block text-xs font-medium text-slate-500 mb-1">MAX PRICE</label>
-            <select class="w-full border-0 focus:ring-0 text-sm p-0 text-slate-700">
+            <select class="w-full rounded-md border border-slate-300 focus:ring-0 text-sm p-0 text-slate-700 focus:border-primary-600">
               <option>Any</option>
               <option>Under $100</option>
               <option>Under $150</option>
@@ -77,7 +100,7 @@
           </div>
           <div class="w-full sm:w-32">
             <label class="block text-xs font-medium text-slate-500 mb-1">PROPERTY TYPE</label>
-            <select class="w-full border-0 focus:ring-0 text-sm p-0 text-slate-700">
+            <select class="w-full rounded-md border border-slate-300 focus:ring-0 text-sm p-0 text-slate-700 focus:border-primary-600">
               <option>Any</option>
               <option>Private Room</option>
               <option>Apartment</option>
@@ -108,7 +131,7 @@
 
       <!-- Map preview -->
       <div class="relative">
-        <div id="hero-map" class="shadow-xl border border-slate-200"></div>
+        <div id="hero-map" class="shadow-lg border border-slate-200"></div>
       </div>
     </div>
   </section>
@@ -145,7 +168,7 @@
               <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-xs font-bold">S</div>
               <span class="text-sm text-slate-600">Sokha M.</span>
             </div>
-            <a href="listings.html" class="text-sm font-medium text-primary-600 border border-primary-200 px-3 py-1.5 rounded-lg hover:bg-primary-50">View Details</a>
+            <a href="property-detail.html?id=featured-room-rupp" class="text-sm font-medium text-primary-600 border border-primary-200 px-3 py-1.5 rounded-lg hover:bg-primary-50">View Details</a>
           </div>
         </div>
       </div>
@@ -171,7 +194,7 @@
               <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-xs font-bold">D</div>
               <span class="text-sm text-slate-600">Dara P.</span>
             </div>
-            <a href="listings.html" class="text-sm font-medium text-primary-600 border border-primary-200 px-3 py-1.5 rounded-lg hover:bg-primary-50">View Details</a>
+            <a href="property-detail.html?id=featured-studio-rule" class="text-sm font-medium text-primary-600 border border-primary-200 px-3 py-1.5 rounded-lg hover:bg-primary-50">View Details</a>
           </div>
         </div>
       </div>
@@ -197,7 +220,7 @@
               <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-xs font-bold">S</div>
               <span class="text-sm text-slate-600">Sreyneang L.</span>
             </div>
-            <a href="listings.html" class="text-sm font-medium text-primary-600 border border-primary-200 px-3 py-1.5 rounded-lg hover:bg-primary-50">View Details</a>
+            <a href="property-detail.html?id=featured-balcony-puc" class="text-sm font-medium text-primary-600 border border-primary-200 px-3 py-1.5 rounded-lg hover:bg-primary-50">View Details</a>
           </div>
         </div>
       </div>
@@ -283,6 +306,130 @@
       [11.548, 104.925], [11.562, 104.940]
     ];
     pins.forEach(p => L.marker(p).addTo(map));
+  </script>
+  <script>
+    const translations = {
+      'NearU | Find the home': 'NearU | ស្វែងរកកន្លែងស្នាក់នៅ',
+      'Home': 'ទំព័រដើម',
+      'Listings': 'បញ្ជីផ្ទះ',
+      'Map': 'ផែនទី',
+      'How it Works': 'របៀបប្រើប្រាស់',
+      'For Landlords': 'សម្រាប់ម្ចាស់ផ្ទះ',
+      'Login': 'ចូលគណនី',
+      'Sign Up': 'ចុះឈ្មោះ',
+      'Find Your Perfect': 'ស្វែងរកកន្លែងស្នាក់នៅដ៏ល្អឥតខ្ចោះ',
+      'Student Rental': 'សម្រាប់និស្សិត',
+      'Verified rooms & apartments near universities across Cambodia. Safe, affordable, and trusted by thousands of students.': 'បន្ទប់ និងអាផាតមិនដែលបានផ្ទៀងផ្ទាត់ នៅជិតសាកលវិទ្យាល័យនានាទូទាំងប្រទេសកម្ពុជា។ មានសុវត្ថិភាព តម្លៃសមរម្យ និងទទួលបានការជឿទុកចិត្តពីនិស្សិតរាប់ពាន់នាក់។',
+      'LOCATION / UNIVERSITY': 'ទីតាំង / សាកលវិទ្យាល័យ',
+      'e.g. RUPP, Toul Kork...': 'ឧ. RUPP, ទួលគោក...',
+      'MAX PRICE': 'តម្លៃអតិបរមា',
+      'Any': 'ទាំងអស់',
+      'Under $100': 'ក្រោម $100',
+      'Under $150': 'ក្រោម $150',
+      'Under $200': 'ក្រោម $200',
+      'PROPERTY TYPE': 'ប្រភេទអចលនទ្រព្យ',
+      'Private Room': 'បន្ទប់ឯកជន',
+      'Apartment': 'អាផាតមិន',
+      'House': 'ផ្ទះ',
+      '🔍 Search': '🔍 ស្វែងរក',
+      'Active Listings': 'ផ្ទះកំពុងជួល',
+      'Happy Students': 'និស្សិតដែលពេញចិត្ត',
+      'Universities': 'សាកលវិទ្យាល័យ',
+      'Featured & Verified Listings': 'ផ្ទះណែនាំ និងបានផ្ទៀងផ្ទាត់',
+      'Hand-picked rooms with verified landlords near top universities': 'បន្ទប់ដែលបានជ្រើសរើសយ៉ាងយកចិត្តទុកដាក់ ពីម្ចាស់ផ្ទះដែលបានផ្ទៀងផ្ទាត់ នៅជិតសាកលវិទ្យាល័យល្បីៗ',
+      'View All Listings →': 'មើលបញ្ជីទាំងអស់ →',
+      '✓ Verified': '✓ បានផ្ទៀងផ្ទាត់',
+      '★ Featured': '★ ផ្ទះណែនាំ',
+      'Modern Private Room near RUPP': 'បន្ទប់ឯកជនទំនើបនៅជិត RUPP',
+      '📍 Toul Kork, Phnom Penh · 0.8 km from university': '📍 ទួលគោក ភ្នំពេញ · 0.8 គីឡូម៉ែត្រពីសាកលវិទ្យាល័យ',
+      'Wi-Fi': 'វ៉ាយហ្វាយ',
+      'Air Conditioner': 'ម៉ាស៊ីនត្រជាក់',
+      'Private Bathroom': 'បន្ទប់ទឹកឯកជន',
+      'View Details': 'មើលព័ត៌មានលម្អិត',
+      'Cozy Studio near RULE': 'ស្ទូឌីយោដ៏កក់ក្ដៅនៅជិត RULE',
+      '📍 Boeung Keng Kang, Phnom Penh · 1.2 km from university': '📍 បឹងកេងកង ភ្នំពេញ · 1.2 គីឡូម៉ែត្រពីសាកលវិទ្យាល័យ',
+      'Kitchen': 'ផ្ទះបាយ',
+      'Luxury Room with Balcony – PUC': 'បន្ទប់ប្រណីតមានយ៉រ – PUC',
+      '📍 Mao Tse Toung Blvd, Phnom Penh · 1.0 km from university': '📍 មហាវិថីម៉ៅសេទុង ភ្នំពេញ · 1.0 គីឡូម៉ែត្រពីសាកលវិទ្យាល័យ',
+      '$120/month': '$120/ខែ',
+      '$150/month': '$150/ខែ',
+      '$180/month': '$180/ខែ',
+      'How It Works': 'របៀបប្រើប្រាស់',
+      'Simple steps to find your ideal student home': 'ជំហានងាយៗដើម្បីស្វែងរកកន្លែងស្នាក់នៅដ៏សមស្របសម្រាប់និស្សិត',
+      'Search & Filter': 'ស្វែងរក និងត្រង',
+      'Browse listings by price, distance to university, amenities and more.': 'ស្វែងរកផ្ទះតាមតម្លៃ ចម្ងាយពីសាកលវិទ្យាល័យ សេវាកម្ម និងច្រើនទៀត។',
+      'Check photos, utilities, exact location and verified landlord info.': 'ពិនិត្យរូបថត សេវាប្រើប្រាស់ ទីតាំងជាក់លាក់ និងព័ត៌មានម្ចាស់ផ្ទះដែលបានផ្ទៀងផ្ទាត់។',
+      'Contact Directly': 'ទាក់ទងដោយផ្ទាល់',
+      'Message via Telegram or call the landlord instantly. No middleman fees.': 'ផ្ញើសារតាម Telegram ឬទូរស័ព្ទទៅម្ចាស់ផ្ទះភ្លាមៗ។ មិនគិតថ្លៃអន្តរការីទេ។',
+      'Move In Safely': 'ចូលស្នាក់នៅដោយសុវត្ថិភាព',
+      'Meet, inspect, and rent with confidence using our safety guidelines.': 'ជួប ពិនិត្យ និងជួលដោយភាពជឿជាក់ ដោយអនុវត្តតាមគោលការណ៍សុវត្ថិភាពរបស់យើង។',
+      'Learn more →': 'ស្វែងយល់បន្ថែម →',
+      'Are You a Landlord?': 'តើអ្នកជាម្ចាស់ផ្ទះមែនទេ?',
+      'List your property for free. Reach thousands of students looking for rooms near universities. Get verified and start receiving inquiries today.': 'ដាក់ប្រកាសអចលនទ្រព្យរបស់អ្នកដោយឥតគិតថ្លៃ។ ឈានដល់និស្សិតរាប់ពាន់នាក់ដែលកំពុងស្វែងរកបន្ទប់នៅជិតសាកលវិទ្យាល័យ។ ផ្ទៀងផ្ទាត់គណនី និងចាប់ផ្ដើមទទួលការសាកសួរថ្ងៃនេះ។',
+      'List Your Property →': 'ដាក់ប្រកាសអចលនទ្រព្យរបស់អ្នក →',
+      '© 2026 NearU. Made for students in Cambodia.': '© 2026 NearU. បង្កើតឡើងសម្រាប់និស្សិតនៅកម្ពុជា។',
+      'About': 'អំពីយើង',
+      'Help': 'ជំនួយ',
+      'Privacy': 'ឯកជនភាព',
+      'Room': 'បន្ទប់'
+    };
+    const originalText = new WeakMap();
+    const originalAttributes = new WeakMap();
+    const languageToggle = document.getElementById('language-toggle');
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    let currentLanguage = 'en';
+
+    darkModeToggle.addEventListener('click', () => {
+      const isDarkMode = document.body.classList.toggle('dark-mode');
+      darkModeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+      darkModeToggle.setAttribute('aria-pressed', String(isDarkMode));
+      darkModeToggle.setAttribute(
+        'aria-label',
+        isDarkMode ? 'Turn off dark mode' : 'Turn on dark mode'
+      );
+    });
+
+    languageToggle.addEventListener('click', () => {
+      const useKhmer = currentLanguage === 'en';
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          return node.parentElement.closest('script, style, #language-toggle')
+            ? NodeFilter.FILTER_REJECT
+            : NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+        const original = originalText.get(node);
+        const trimmed = original.trim();
+        const translated = translations[trimmed];
+        node.nodeValue = useKhmer && translated
+          ? original.replace(trimmed, translated)
+          : original;
+      }
+
+      document.title = useKhmer
+        ? translations['NearU | Find the home']
+        : 'NearU | Find the home';
+
+      document.querySelectorAll('[placeholder], [alt]').forEach(element => {
+        if (!originalAttributes.has(element)) originalAttributes.set(element, {});
+        const attributes = originalAttributes.get(element);
+        ['placeholder', 'alt'].forEach(attribute => {
+          if (!element.hasAttribute(attribute)) return;
+          if (!(attribute in attributes)) attributes[attribute] = element.getAttribute(attribute);
+          const original = attributes[attribute];
+          element.setAttribute(attribute, useKhmer ? translations[original] || original : original);
+        });
+      });
+
+      currentLanguage = useKhmer ? 'km' : 'en';
+      document.documentElement.lang = currentLanguage;
+      languageToggle.textContent = useKhmer ? 'EN ▾' : 'ខ្មែរ ▾';
+      languageToggle.setAttribute('aria-label', useKhmer ? 'Switch to English' : 'Switch to Khmer');
+    });
   </script>
 </body>
 </html>
