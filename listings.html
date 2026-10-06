@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Listings – NearU</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-8">
+          <a href="index.html" class="flex items-center gap-2 font-bold text-xl text-primary-600">
+            <span class="w-8 h-8 bg-primary-600 text-white rounded-lg flex items-center justify-center text-sm">🏠</span>
+            NearU.
+          </a>
+          <div class="hidden md:flex items-center gap-1">
+            <a href="index.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 hover:bg-slate-100 rounded-lg">Home</a>
+            <a href="listings.html" class="px-3 py-2 text-sm font-medium text-primary-600 bg-primary-50 rounded-lg">Listings</a>
+            <a href="map.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 hover:bg-slate-100 rounded-lg">Map</a>
+            <a href="how-it-works.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 hover:bg-slate-100 rounded-lg">How it Works</a>
+            <a href="landlords.html" class="px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 hover:bg-slate-100 rounded-lg">For Landlords</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="text-sm text-slate-500 hover:text-slate-700">EN ▾</button>
+          <button class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">🌙</button>
+          <a href="#" class="text-sm font-medium text-slate-600 hover:text-primary-600">Login</a>
+          <a href="#" class="px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Filters Sidebar -->
+      <aside class="w-full lg:w-64 flex-shrink-0">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 sticky top-24">
+          <h2 class="font-semibold text-slate-900 mb-4">Filters</h2>
+
+          <div class="mb-5">
+            <label class="block text-xs font-medium text-slate-500 mb-2">Price Range (per month)</label>
+            <input type="range" min="50" max="300" value="200" class="w-full accent-primary-600" />
+            <div class="flex justify-between text-xs text-slate-500 mt-1">
+              <span>$50</span>
+              <span>$90 – $200</span>
+              <span>$300</span>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <label class="block text-xs font-medium text-slate-500 mb-2">Property Type</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="rounded text-primary-600" /> Private Room (42)</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="rounded text-primary-600" /> Apartment (38)</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="rounded text-primary-600" /> House (48)</label>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <label class="block text-xs font-medium text-slate-500 mb-2">Amenities</label>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="rounded text-primary-600" /> Wi-Fi</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="rounded text-primary-600" /> Air Conditioner</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="rounded text-primary-600" /> Private Bathroom</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" class="rounded text-primary-600" /> Kitchen</label>
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <label class="block text-xs font-medium text-slate-500 mb-2">Distance to University</label>
+            <input type="range" min="0" max="5" value="2" step="0.5" class="w-full accent-primary-600" />
+            <div class="flex justify-between text-xs text-slate-500 mt-1">
+              <span>0 km</span>
+              <span>Up to 1.5 km</span>
+              <span>5 km</span>
+            </div>
+          </div>
+
+          <button class="w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2.5 rounded-xl">Apply Filters</button>
+          <button class="w-full mt-2 text-sm text-slate-500 hover:text-slate-700">Clear All</button>
+        </div>
+      </aside>
+
+      <!-- Listings Grid -->
+      <main class="flex-1">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h1 class="text-2xl font-bold text-slate-900">All Listings</h1>
+            <p class="text-sm text-slate-500 mt-1">Showing 1–6 of 128 verified properties</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <select class="text-sm border border-slate-200 rounded-lg px-3 py-2 bg-white">
+              <option>Sort by: Newest</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Distance</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5">
+          <!-- Cards -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="relative h-44 bg-slate-200">
+              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500&h=350&fit=crop" class="w-full h-full object-cover" alt="" />
+              <span class="absolute top-2 left-2 bg-emerald-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">✓ Verified</span>
+              <span class="absolute top-2 right-2 bg-amber-400 text-white text-xs font-semibold px-2 py-0.5 rounded-full">★ Featured</span>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start">
+                <h3 class="font-semibold text-slate-900 text-sm">Private Room near RUPP</h3>
+                <span class="font-bold text-primary-600">$90<span class="text-xs font-normal text-slate-500">/mo</span></span>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">📍 0.5 km to RUPP</p>
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Wi-Fi</span>
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Private Bathroom</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-[10px] font-bold">S</div>
+                  <span class="text-xs text-slate-600">Sokha L.</span>
+                </div>
+                <button class="text-xs font-medium text-primary-600 border border-primary-200 px-2.5 py-1 rounded-lg hover:bg-primary-50">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="relative h-44 bg-slate-200">
+              <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=500&h=350&fit=crop" class="w-full h-full object-cover" alt="" />
+              <span class="absolute top-2 left-2 bg-emerald-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">✓ Verified</span>
+              <span class="absolute top-2 right-2 bg-amber-400 text-white text-xs font-semibold px-2 py-0.5 rounded-full">★ Featured</span>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start">
+                <h3 class="font-semibold text-slate-900 text-sm">Cozy Studio near RULE</h3>
+                <span class="font-bold text-primary-600">$160<span class="text-xs font-normal text-slate-500">/mo</span></span>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">📍 0.7 km to RULE</p>
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Wi-Fi</span>
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Air Conditioner</span>
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Kitchen</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-[10px] font-bold">R</div>
+                  <span class="text-xs text-slate-600">Rithy M.</span>
+                </div>
+                <button class="text-xs font-medium text-primary-600 border border-primary-200 px-2.5 py-1 rounded-lg hover:bg-primary-50">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="relative h-44 bg-slate-200">
+              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&h=350&fit=crop" class="w-full h-full object-cover" alt="" />
+              <span class="absolute top-2 left-2 bg-emerald-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">✓ Verified</span>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start">
+                <h3 class="font-semibold text-slate-900 text-sm">Shared House near NUM</h3>
+                <span class="font-bold text-primary-600">$120<span class="text-xs font-normal text-slate-500">/mo</span></span>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">📍 1.0 km to NUM</p>
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Wi-Fi</span>
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Kitchen</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-[10px] font-bold">V</div>
+                  <span class="text-xs text-slate-600">Vanny P.</span>
+                </div>
+                <button class="text-xs font-medium text-primary-600 border border-primary-200 px-2.5 py-1 rounded-lg hover:bg-primary-50">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="relative h-44 bg-slate-200">
+              <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500&h=350&fit=crop" class="w-full h-full object-cover" alt="" />
+              <span class="absolute top-2 left-2 bg-emerald-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">✓ Verified</span>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start">
+                <h3 class="font-semibold text-slate-900 text-sm">Private Room near ITC</h3>
+                <span class="font-bold text-primary-600">$85<span class="text-xs font-normal text-slate-500">/mo</span></span>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">📍 0.6 km to ITC</p>
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Wi-Fi</span>
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Private Bathroom</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-[10px] font-bold">C</div>
+                  <span class="text-xs text-slate-600">Channa S.</span>
+                </div>
+                <button class="text-xs font-medium text-primary-600 border border-primary-200 px-2.5 py-1 rounded-lg hover:bg-primary-50">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="relative h-44 bg-slate-200">
+              <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=500&h=350&fit=crop" class="w-full h-full object-cover" alt="" />
+              <span class="absolute top-2 left-2 bg-emerald-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">✓ Verified</span>
+              <span class="absolute top-2 right-2 bg-amber-400 text-white text-xs font-semibold px-2 py-0.5 rounded-full">★ Featured</span>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start">
+                <h3 class="font-semibold text-slate-900 text-sm">Modern Studio near AEON</h3>
+                <span class="font-bold text-primary-600">$200<span class="text-xs font-normal text-slate-500">/mo</span></span>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">📍 1.2 km to AEON</p>
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Wi-Fi</span>
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Air Conditioner</span>
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Kitchen</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-[10px] font-bold">T</div>
+                  <span class="text-xs text-slate-600">Theavy K.</span>
+                </div>
+                <button class="text-xs font-medium text-primary-600 border border-primary-200 px-2.5 py-1 rounded-lg hover:bg-primary-50">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition">
+            <div class="relative h-44 bg-slate-200">
+              <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=500&h=350&fit=crop" class="w-full h-full object-cover" alt="" />
+              <span class="absolute top-2 left-2 bg-emerald-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">✓ Verified</span>
+            </div>
+            <div class="p-4">
+              <div class="flex justify-between items-start">
+                <h3 class="font-semibold text-slate-900 text-sm">House Room near BBU</h3>
+                <span class="font-bold text-primary-600">$110<span class="text-xs font-normal text-slate-500">/mo</span></span>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">📍 1.5 km to BBU</p>
+              <div class="flex flex-wrap gap-1.5 mt-2">
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Wi-Fi</span>
+                <span class="text-xs bg-slate-100 px-2 py-0.5 rounded-full">Private Bathroom</span>
+              </div>
+              <div class="flex items-center justify-between mt-3 pt-3 border-t border-slate-100">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-[10px] font-bold">D</div>
+                  <span class="text-xs text-slate-600">Dara T.</span>
+                </div>
+                <button class="text-xs font-medium text-primary-600 border border-primary-200 px-2.5 py-1 rounded-lg hover:bg-primary-50">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-10 flex items-center justify-center gap-2">
+          <button class="w-9 h-9 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-100">‹</button>
+          <button class="w-9 h-9 rounded-lg bg-primary-600 text-white font-medium">1</button>
+          <button class="w-9 h-9 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100">2</button>
+          <button class="w-9 h-9 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-100">3</button>
+          <button class="w-9 h-9 rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-100">›</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-8 mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 font-bold text-primary-600">
+        <span class="w-7 h-7 bg-primary-600 text-white rounded-lg flex items-center justify-center text-xs">🏠</span>
+        NearU.
+      </div>
+      <p class="text-sm text-slate-500">© 2026 NearU. Made for students in Cambodia.</p>
+      <div class="flex gap-6 text-sm text-slate-500">
+        <a href="#" class="hover:text-primary-600">About</a>
+        <a href="#" class="hover:text-primary-600">Help</a>
+        <a href="#" class="hover:text-primary-600">Privacy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
